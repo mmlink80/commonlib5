@@ -38,7 +38,7 @@ public class JsonHelper implements Closeable
   protected final ArrayMap<String, String> headers = new ArrayMap<>();
   protected boolean wrapException = false;
 
-  // Fino alla JDK 8 non era previsto l'http method PATCH. L'errore che si presenta è:
+  // L'http method PATCH non è supportato. L'errore che si presenta è:
   // java.net.ProtocolException: Invalid HTTP method: PATCH
   // La seguente soluzione, precedentemente adottata, non veniva accettata dall'endpoint invocato:
   // HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -50,7 +50,7 @@ public class JsonHelper implements Closeable
   {
     try
     {
-      if(OsIdent.getJavaVersionNumber() <= 1.8f)
+      if(OsIdent.getJavaVersionNumber() <= 11.0f)
       {
         Field methodsField = HttpURLConnection.class.getDeclaredField("methods");
         methodsField.setAccessible(true);
